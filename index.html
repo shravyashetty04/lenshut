@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LensHut is a premier multi-brand optical store providing a wide variety of high-quality eyewear and optical services.">
+    <title>LensHut | Premium Eyewear & Optical Services</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Open menu">
+                <i class="ph ph-list"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo">
+            </a>
+
+            <!-- Center Navigation -->
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right Icons -->
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+                <button class="action-btn" aria-label="Account">
+                    <i class="ph ph-user"></i>
+                </button>
+                <button class="action-btn" aria-label="Wishlist">
+                    <i class="ph ph-heart"></i>
+                </button>
+                <button class="action-btn cart-btn" aria-label="Cart">
+                    <i class="ph ph-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav Overlay -->
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-content">
+                <button class="close-menu" aria-label="Close menu">
+                    <i class="ph ph-x"></i>
+                </button>
+                <ul class="mobile-nav-list">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#testimonials">Customer Speak</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="cart-body">
+            <p class="empty-cart-msg">Your cart is currently empty.</p>
+            <!-- Cart items will be injected here -->
+        </div>
+        <div class="cart-footer">
+            <button class="btn btn-primary w-100">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-overlay">
+        <div class="quick-view-modal">
+            <button class="close-modal"><i class="ph ph-x"></i></button>
+            <div class="quick-view-content" id="quick-view-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <video class="hero-video" autoplay loop muted playsinline>
+                    <source src="give_video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <span class="hero-subtitle">Premium Collections</span>
+                        <h1 class="hero-title">Experience the world of luxury eyewear</h1>
+                        <div class="hero-actions">
+                            <a href="#shop" class="btn btn-primary">Explore Eyewear</a>
+                            <a href="#stores" class="btn btn-secondary">Visit Our Stores</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Hottest Collections -->
+    <section class="hottest-collections section-padding" style="background-color: var(--clr-dark);">
+        <div class="collections-wrapper">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2 style="color: var(--clr-dark);">Hottest Collections</h2>
+                <a href="#shop" class="view-all" style="color: var(--clr-dark);">View All Products <i class="ph ph-arrow-right"></i></a>
+            </div>
+            <div class="collections-grid">
+                <!-- Card 1 -->
+                <div class="collection-card">
+                    <div class="collection-img">
+                        <img src="collection_eyeglasses_1786531144530.png" alt="Eyeglasses">
+                    </div>
+                    <div class="collection-icon"><i class="ph ph-eyeglasses"></i></div>
+                    <div class="collection-body">
+                        <h3>Eyeglasses</h3>
+                        <p>Clear vision, everyday style.</p>
+                        <a href="products.html" class="btn-explore">Explore Products <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="collection-card">
+                    <div class="collection-img">
+                        <img src="collection_sunglasses_1786531155468.png" alt="Sunglasses">
+                    </div>
+                    <div class="collection-icon"><i class="ph ph-sunglasses"></i></div>
+                    <div class="collection-body">
+                        <h3>Sunglasses</h3>
+                        <p>UV protection, unmatched style.</p>
+                        <a href="products.html" class="btn-explore">Explore Products <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="collection-card">
+                    <div class="collection-img">
+                        <img src="collection_new_1786531166824.png" alt="New Arrivals">
+                    </div>
+                    <div class="collection-icon"><i class="ph ph-sparkle"></i></div>
+                    <div class="collection-body">
+                        <h3>New Arrivals</h3>
+                        <p>Fresh styles, just for you.</p>
+                        <a href="products.html" class="btn-explore">Explore Products <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="collection-card">
+                    <div class="collection-img">
+                        <img src="collection_trending_1786531179525.png" alt="Trending Now">
+                    </div>
+                    <div class="collection-icon"><i class="ph ph-fire"></i></div>
+                    <div class="collection-body">
+                        <h3>Trending Now</h3>
+                        <p>Most loved styles right now.</p>
+                        <a href="products.html" class="btn-explore">Explore Products <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- New Arrivals Editorial Section -->
+    <section class="new-arrivals section-padding">
+        <div class="container">
+            <div class="editorial-layout">
+                <div class="editorial-featured">
+                    <div class="editorial-img-wrapper">
+                        <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-1.jpg" alt="Featured New Arrival" class="editorial-img">
+                        <div class="editorial-badge">New Arrival</div>
+                    </div>
+                    <div class="editorial-content">
+                        <h2>Friendly Frames</h2>
+                        <p>Explore our latest collection of premium eyewear designed for modern living.</p>
+                        <a href="#shop" class="btn btn-outline">Shop Collection</a>
+                    </div>
+                </div>
+                <div class="editorial-grid">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-2.jpg" alt="Frame" class="primary-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Classic Rectangle</h3>
+                            <p class="product-category">Eyeglasses</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-3.jpg" alt="Frame" class="primary-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Vintage Round</h3>
+                            <p class="product-category">Sunglasses</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-5.jpg" alt="Frame" class="primary-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Modern Aviator</h3>
+                            <p class="product-category">Eyeglasses</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-6.jpg" alt="Frame" class="primary-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Elegant Cat-Eye</h3>
+                            <p class="product-category">Eyeglasses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Experience Section -->
+    <section class="luxury-experience section-padding bg-dark text-white" id="about">
+        <div class="container">
+            <div class="luxury-grid">
+                <div class="luxury-content">
+                    <h2 class="luxury-title">Experience the world of luxury eyewear</h2>
+                    <p class="luxury-desc">LensHut is a premier multi-brand optical store dedicated to providing a wide variety of high-quality eyewear and optical services to suit every need and style. Whether you’re in search of prescription glasses, stylish sunglasses, or the latest in eyewear trends, LensHut has you covered with an extensive selection from top eyewear brands.</p>
+                    <a href="#about" class="btn btn-primary-light">Know More</a>
+                </div>
+                <div class="luxury-image">
+                    <img src="https://lens-hut.in/wp-content/uploads/slider/cache/6973f5b5ededdbe546ac61c198990bc3/2-2.png" alt="Luxury Eyewear Experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Our Services</h2>
+                <p>In addition to offering eyewear, LensHut also provides expert optical services.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ph ph-eye"></i>
+                    </div>
+                    <h3>Eye Tests and Consultation</h3>
+                    <p>Our expert optometrists are available to conduct thorough eye exams, helping you choose the best lenses and ensure optimal eye health.</p>
+                    <a href="#contact" class="btn-link">Book Appointment <i class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ph ph-sunglasses"></i>
+                    </div>
+                    <h3>Frame Styling and Customization</h3>
+                    <p>Our knowledgeable staff can assist you in selecting frames that complement your face shape and personal style.</p>
+                    <a href="#stores" class="btn-link">Visit a Store <i class="ph ph-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Locator Section -->
+    <section class="store-locator section-padding bg-light" id="stores">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Our Stores</h2>
+                <p>Find a LensHut store near you for the ultimate optical experience.</p>
+            </div>
+            
+            <div class="store-city-filter text-center" style="margin-bottom: 2rem;">
+                <select id="citySelect" class="city-select">
+                    <option value="bengaluru">Bengaluru</option>
+                    <option value="mysuru">Mysuru</option>
+                    <option value="tumkur">Tumkur</option>
+                    <option value="hassan">Hassan</option>
+                </select>
+            </div>
+            
+            <div id="grid-bengaluru" class="stores-grid city-grid" style="display: grid;">
+                <!-- Store 1 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut Banashankari</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+Banashankari+Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>2stage, 2 Block, 276/278 14 th main road, 80 Feet Rd, Banashankari, Bengaluru, Karnataka 560050</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>9916901201</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+Banashankari+Bengaluru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store 2 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut JP Nagar</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+JP+Nagar+Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, 5th Phase, JPNAGAR, Bengaluru, Karnataka 560078</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>9513106789</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+JP+Nagar+Bengaluru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store 3 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut Malleshwaram</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+Malleshwaram+Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Om Mahaganapathi Complex, 17, Margosa Rd, Malleshwaram, Bengaluru, Karnataka 560003</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>08041225517</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+Malleshwaram+Bengaluru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store 4 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut HSR</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+HSR+Layout+Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Ground floor, 27th Main Rd, Phase 3, Agara Village, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>08042134243</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+HSR+Layout+Bengaluru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div id="grid-mysuru" class="stores-grid city-grid" style="display: none;">
+                <!-- Store 1 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut Kuvempu Nagara</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+Kuvempu+Nagara+Mysuru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Ground Floor, MIG 2, New Kantharaj Urs Rd, near Sri S Nijalingappa Circle, Kuvempu Nagara, Mysuru, Karnataka 570023</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>8214260042</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+Kuvempu+Nagara+Mysuru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store 2 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut URS Road</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+URS+Road+Mysuru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Shop No 9 D, D Devaraj Urs Rd, next to City Bus Stop, Subbarayanakere, Shivarampet, Mysuru, Karnataka 570001</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>8214252040</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+URS+Road+Mysuru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="grid-tumkur" class="stores-grid city-grid" style="display: none;">
+                <!-- Store 1 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut Tumkur</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+Tumakuru&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Bar, No 1861/846 Krishna Arcade, 2nd Cross Road, Lane Road, near Planet Max, Tumakuru, Karnataka 572101</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>08164051743</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+Tumakuru" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="grid-hassan" class="stores-grid city-grid" style="display: none;">
+                <!-- Store 1 -->
+                <div class="map-store-card">
+                    <h3 class="store-title">LensHut Hassan</h3>
+                    <div class="map-container">
+                        <iframe src="https://maps.google.com/maps?q=LensHut+Hassan&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="store-details">
+                        <div class="detail-row">
+                            <i class="ph-fill ph-map-pin"></i>
+                            <p>Ground Floor, No 198/A, Shankar Mutt Rd, Krishnaraja Pura, Hassan, Karnataka 573201</p>
+                        </div>
+                        <div class="detail-row">
+                            <i class="ph-fill ph-device-mobile"></i>
+                            <p>08172450094</p>
+                        </div>
+                        <div class="store-action">
+                            <a href="https://maps.google.com/?q=LensHut+Hassan" target="_blank" class="btn-map"><i class="ph-fill ph-map-pin"></i> Map</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox" onclick="closeLightbox()"><i class="ph ph-x"></i></button>
+        <img src="" alt="Fullscreen Image" id="lightbox-img">
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section section-padding" id="testimonials">
+        <!-- Elegant Background Element -->
+        <div class="testi-bg-quote"><i class="ph-fill ph-quotes"></i></div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-header text-center mb-5">
+                <span class="testi-subtitle">TESTIMONIALS</span>
+                <h2>Customer Speak</h2>
+                <p>See what our customers have to say about LensHut.</p>
+            </div>
+            
+            <div class="testimonial-carousel-wrapper">
+                <div class="testimonial-carousel" id="testimonial-carousel">
+                    <!-- Injected via JS -->
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="testi-arrow prev" onclick="goToPrevSlide()"><i class="ph ph-arrow-left"></i></button>
+                <button class="testi-arrow next" onclick="goToNextSlide()"><i class="ph ph-arrow-right"></i></button>
+
+                <div class="carousel-dots" id="testimonial-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Trust Section -->
+    <section class="trust-section section-padding">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="ph ph-certificate"></i>
+                    <h4>Premium Brands</h4>
+                    <p>Wide variety of luxury and authentic eyewear brands.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="ph ph-eyeglasses"></i>
+                    <h4>Expert Styling</h4>
+                    <p>Professional assistance for frame customization.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="ph ph-stethoscope"></i>
+                    <h4>Eye Testing</h4>
+                    <p>Thorough consultation by expert optometrists.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="ph ph-storefront"></i>
+                    <h4>Multiple Locations</h4>
+                    <p>Convenient physical stores across Karnataka.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col brand-col">
+                    <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo" class="footer-logo">
+                    <p>Experience the world of luxury eyewear with premium styling and expert optical services.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>LensHut</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#stores">Our Stores</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#testimonials">Customer Speak</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Eyewear</h4>
+                    <ul>
+                        <li><a href="#shop">Eyeglasses</a></li>
+                        <li><a href="#shop">Sunglasses</a></li>
+                        <li><a href="#shop">Trending</a></li>
+                        <li><a href="#shop">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col contact-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="ph ph-map-pin"></i> <span>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, JP NAGAR, Bengaluru</span></li>
+                        <li><i class="ph ph-phone"></i> <a href="tel:+918884111108">+91 8884111108</a></li>
+                        <li><i class="ph ph-envelope"></i> <a href="mailto:Info@lens-hut.in">Info@lens-hut.in</a></li>
+                    </ul>
+                    <a href="#stores" class="btn btn-outline btn-sm mt-3">Find a Store</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 LensHut | Premium Optical Store. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

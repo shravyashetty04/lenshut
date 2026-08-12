@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LensHut is a premier multi-brand optical store providing a wide variety of high-quality eyewear and optical services.">
+    <title>LensHut | Gallery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Open menu">
+                <i class="ph ph-list"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo">
+            </a>
+
+            <!-- Center Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="index.html#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right Icons -->
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+                <button class="action-btn" aria-label="Account">
+                    <i class="ph ph-user"></i>
+                </button>
+                <button class="action-btn" aria-label="Wishlist">
+                    <i class="ph ph-heart"></i>
+                </button>
+                <button class="action-btn cart-btn" aria-label="Cart">
+                    <i class="ph ph-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav Overlay -->
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-content">
+                <button class="close-menu" aria-label="Close menu">
+                    <i class="ph ph-x"></i>
+                </button>
+                <ul class="mobile-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="index.html#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#testimonials">Customer Speak</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="cart-body">
+            <p class="empty-cart-msg">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <button class="btn btn-primary w-100">Checkout</button>
+        </div>
+    </div>
+
+    <!-- About Page Content -->
+    <main class="about-page" style="margin-top: 80px;">
+        <!-- Breadcrumb -->
+        <div class="container breadcrumb-container">
+            <a href="index.html">HOME</a> &gt; <span>ABOUT US</span>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="about-hero section-padding">
+            <div class="container">
+                <div class="about-hero-grid">
+                    <div class="about-hero-content">
+                        <span class="testi-subtitle">ABOUT LENSHUT</span>
+                        <h1 class="about-hero-title">Clarity. Style.<br>Confidence<span class="text-primary">.</span></h1>
+                        
+                        <p class="about-desc">LensHut is a premier multi-brand optical store dedicated to providing a wide variety of high-quality eyewear and optical services to suit every need and style.</p>
+                        
+                        <p class="about-desc">Whether you're in search of prescription glasses, stylish sunglasses, or the latest in eyewear trends, LensHut has you covered with an extensive selection from top eyewear brands.</p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <div class="feature-icon-wrapper"><i class="ph ph-seal-check"></i></div>
+                                <h4>Premium Quality</h4>
+                                <p>Carefully selected<br>top eyewear brands</p>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon-wrapper"><i class="ph ph-user"></i></div>
+                                <h4>Expert Guidance</h4>
+                                <p>Professional advice<br>for the perfect fit</p>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon-wrapper"><i class="ph ph-heart"></i></div>
+                                <h4>Customer First</h4>
+                                <p>Your style, comfort &<br>vision are our priority</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-hero-image-wrapper">
+                        <div class="hero-circle-bg"></div>
+                        <img src="https://lens-hut.in/wp-content/uploads/2025/03/Glasses-1-1.jpg" alt="Premium Eyewear" class="hero-glasses-img">
+                        <div class="floating-badge">
+                            <div class="badge-icon"><i class="ph ph-eyeglasses"></i></div>
+                            <div class="badge-text">
+                                <strong>See Better.<br>Live Better.</strong>
+                                <span>That's our promise, our passion.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Our Range -->
+        <section class="about-range section-padding" style="background-color: #f4f7fb;">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <span class="testi-subtitle">WHAT WE OFFER</span>
+                    <h2 class="about-hero-title">Explore Our Range of <span class="text-primary">Products</span></h2>
+                </div>
+                
+                <div class="range-grid">
+                    <!-- Card 1 -->
+                    <div class="range-card">
+                        <div class="range-img-wrapper">
+                            <img src="collection_eyeglasses_1786531144530.png" alt="Prescription Glasses">
+                            <div class="range-icon"><i class="ph ph-eyeglasses"></i></div>
+                        </div>
+                        <div class="range-content">
+                            <h3>Prescription Glasses</h3>
+                            <p>With an impressive collection of frames and lenses, LensHut ensures that you find the perfect fit for your prescription and personal style.</p>
+                            <a href="products.html" class="explore-link">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="range-card">
+                        <div class="range-img-wrapper">
+                            <img src="collection_sunglasses_1786531155468.png" alt="Sunglasses">
+                            <div class="range-icon" style="background-color: #8b5cf6;"><i class="ph ph-sun"></i></div>
+                        </div>
+                        <div class="range-content">
+                            <h3>Sunglasses</h3>
+                            <p>From classic designs to the latest fashion trends, our store offers premium sunglasses that provide UV protection while enhancing your look.</p>
+                            <a href="products.html" class="explore-link" style="color: #8b5cf6;">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="range-card">
+                        <div class="range-img-wrapper">
+                            <img src="contact_lenses.png" alt="Contact Lenses">
+                            <div class="range-icon" style="background-color: #10b981;"><i class="ph ph-drop"></i></div>
+                        </div>
+                        <div class="range-content">
+                            <h3>Contact Lenses</h3>
+                            <p>We offer a range of soft and specialty contact lenses for those who prefer contact lenses over glasses.</p>
+                            <a href="products.html" class="explore-link" style="color: #10b981;">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Design Brands -->
+        <section class="premium-brands section-padding">
+            <div class="container">
+                <div class="premium-grid">
+                    <div class="premium-content">
+                        <span class="testi-subtitle">OUR PROMISE</span>
+                        <h2 class="about-hero-title mb-4">World's Premium<br>Design Brands</h2>
+                        <div class="testi-divider mb-4"></div>
+                        <p class="about-desc">LensHut is a premier multi-brand optical store, dedicated to providing customers with a diverse selection of high-quality eyewear.</p>
+                        <p class="about-desc">We offer an extensive range of eyeglasses, sunglasses, and contact lenses from top global brands.</p>
+                        <p class="about-desc mb-4">Our team of experienced professionals is committed to helping you find the perfect pair that suits your style, comfort, and vision needs.</p>
+                        <a href="index.html#contact" class="btn btn-dark">MEET OUR EXPERTS <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="premium-image-wrapper">
+                        <img src="https://lens-hut.in/wp-content/uploads/2025/03/1-6.png" alt="Happy Customer" class="premium-img">
+                        <div class="floating-widget">
+                            <div class="avatars-group">
+                                <img src="https://ui-avatars.com/api/?name=J&background=random&color=fff" alt="User">
+                                <img src="https://ui-avatars.com/api/?name=A&background=random&color=fff" alt="User">
+                                <img src="https://ui-avatars.com/api/?name=M&background=random&color=fff" alt="User">
+                            </div>
+                            <div class="widget-text">
+                                <strong>10K+</strong>
+                                <span>Happy Customers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-list-wrapper">
+                        <h4 class="portfolio-title">THE PORTFOLIO</h4>
+                        <ul class="portfolio-list">
+                            <li><i class="ph ph-globe"></i> International Brand Lenses</li>
+                            <li><i class="ph ph-eye"></i> In-house Curated Lens Designs</li>
+                            <li><i class="ph ph-headset"></i> Brand Expert Guidance for Adaptation</li>
+                            <li><i class="ph ph-eyeglasses"></i> Hand Picked Frames and Designs</li>
+                            <li><i class="ph ph-star"></i> Trending Designs and Dynamic Stock</li>
+                            <li><i class="ph ph-tag"></i> Exclusive Price Range</li>
+                            <li><i class="ph ph-flask"></i> Professional Lab Fitting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Banner -->
+        <section class="stats-banner">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon" style="background-color: #3b82f6;"><i class="ph ph-users"></i></div>
+                        <h3>10K+</h3>
+                        <p class="stat-label">Happy Customers</p>
+                        <p class="stat-desc">Trusted by thousands across the country.</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon" style="background-color: #8b5cf6;"><i class="ph ph-eyeglasses"></i></div>
+                        <h3>50+</h3>
+                        <p class="stat-label">Top Brands</p>
+                        <p class="stat-desc">Curated collection of global and premium brands.</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon" style="background-color: #10b981;"><i class="ph ph-shield-check"></i></div>
+                        <h3>100%</h3>
+                        <p class="stat-label">Quality Assurance</p>
+                        <p class="stat-desc">Every product meets the highest quality standards.</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon" style="background-color: #f59e0b;"><i class="ph ph-medal"></i></div>
+                        <h3 class="stat-title-small">Expert Care</h3>
+                        <p class="stat-desc mt-2">Professional guidance and after-sales support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col brand-col">
+                    <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo" class="footer-logo">
+                    <p>Experience the world of luxury eyewear with premium styling and expert optical services.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>LensHut</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#stores">Our Stores</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#testimonials">Customer Speak</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Eyewear</h4>
+                    <ul>
+                        <li><a href="products.html">Eyeglasses</a></li>
+                        <li><a href="products.html">Sunglasses</a></li>
+                        <li><a href="products.html">Trending</a></li>
+                        <li><a href="products.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col contact-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="ph ph-map-pin"></i> <span>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, JP NAGAR, Bengaluru</span></li>
+                        <li><i class="ph ph-phone"></i> <a href="tel:+918884111108">+91 8884111108</a></li>
+                        <li><i class="ph ph-envelope"></i> <a href="mailto:Info@lens-hut.in">Info@lens-hut.in</a></li>
+                    </ul>
+                    <a href="index.html#stores" class="btn btn-outline btn-sm mt-3">Find a Store</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 LensHut | Premium Optical Store. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

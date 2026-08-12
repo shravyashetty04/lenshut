@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LensHut is a premier multi-brand optical store providing a wide variety of high-quality eyewear and optical services.">
+    <title>LensHut | Gallery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Open menu">
+                <i class="ph ph-list"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo">
+            </a>
+
+            <!-- Center Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="index.html#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right Icons -->
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+                <button class="action-btn" aria-label="Account">
+                    <i class="ph ph-user"></i>
+                </button>
+                <button class="action-btn" aria-label="Wishlist">
+                    <i class="ph ph-heart"></i>
+                </button>
+                <button class="action-btn cart-btn" aria-label="Cart">
+                    <i class="ph ph-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav Overlay -->
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-content">
+                <button class="close-menu" aria-label="Close menu">
+                    <i class="ph ph-x"></i>
+                </button>
+                <ul class="mobile-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="index.html#stores">Our Stores</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#testimonials">Customer Speak</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="cart-body">
+            <p class="empty-cart-msg">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <button class="btn btn-primary w-100">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Masonry Gallery -->
+    <section class="gallery-section section-padding" id="gallery" style="margin-top: 100px;">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Gallery</h2>
+                <p>Discover our collections and store experience.</p>
+            </div>
+            
+            <div class="masonry-gallery">
+                <div class="gallery-item wide" onclick="openLightbox('store_1.jpg')">
+                    <img src="store_1.jpg" alt="Lenshut Store 1" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item tall" onclick="openLightbox('store_2.jpg')">
+                    <img src="store_2.jpg" alt="Lenshut Store 2" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('store_3.jpg')">
+                    <img src="store_3.jpg" alt="Lenshut Store 3" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item wide" onclick="openLightbox('store_4.jpg')">
+                    <img src="store_4.jpg" alt="Lenshut Store 4" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('store_5.jpg')">
+                    <img src="store_5.jpg" alt="Lenshut Store 5" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <!-- New Images -->
+                <div class="gallery-item wide" onclick="openLightbox('store_6.jpg')">
+                    <img src="store_6.jpg" alt="Lenshut Store 6" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('store_7.jpg')">
+                    <img src="store_7.jpg" alt="Lenshut Store 7" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item tall" onclick="openLightbox('store_8.jpg')">
+                    <img src="store_8.jpg" alt="Lenshut Store 8" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item wide" onclick="openLightbox('store_9.jpg')">
+                    <img src="store_9.jpg" alt="Lenshut Store 9" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item tall" onclick="openLightbox('store_10.jpg')">
+                    <img src="store_10.jpg" alt="Lenshut Store 10" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <!-- More New Images -->
+                <div class="gallery-item wide" onclick="openLightbox('store_11.png')">
+                    <img src="store_11.png" alt="Lenshut Store 11" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+                <div class="gallery-item tall" onclick="openLightbox('store_12.png')">
+                    <img src="store_12.png" alt="Lenshut Store 12" loading="lazy">
+                    <div class="gallery-overlay"><i class="ph ph-corners-out"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox" onclick="closeLightbox()"><i class="ph ph-x"></i></button>
+        <img src="" alt="Fullscreen Image" id="lightbox-img">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col brand-col">
+                    <img src="https://lens-hut.in/wp-content/uploads/2025/03/Lens-Hut.png" alt="LensHut Logo" class="footer-logo">
+                    <p>Experience the world of luxury eyewear with premium styling and expert optical services.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>LensHut</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#stores">Our Stores</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#testimonials">Customer Speak</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Eyewear</h4>
+                    <ul>
+                        <li><a href="products.html">Eyeglasses</a></li>
+                        <li><a href="products.html">Sunglasses</a></li>
+                        <li><a href="products.html">Trending</a></li>
+                        <li><a href="products.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col contact-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="ph ph-map-pin"></i> <span>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, JP NAGAR, Bengaluru</span></li>
+                        <li><i class="ph ph-phone"></i> <a href="tel:+918884111108">+91 8884111108</a></li>
+                        <li><i class="ph ph-envelope"></i> <a href="mailto:Info@lens-hut.in">Info@lens-hut.in</a></li>
+                    </ul>
+                    <a href="index.html#stores" class="btn btn-outline btn-sm mt-3">Find a Store</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 LensHut | Premium Optical Store. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
