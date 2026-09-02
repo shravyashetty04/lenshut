@@ -81,43 +81,114 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = products.find(p => p.id === productId);
         if (!product) return;
 
-        qvContent.innerHTML = `
-            <div class="qv-grid">
-                <div class="qv-img">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
-                <div class="qv-details">
-                    <p class="product-category">${product.category}</p>
-                    <h3>${product.name}</h3>
-                    <div class="qv-price">₹${product.price}</div>
-                    <p>Experience superior comfort and style with the ${product.name}. Premium materials and expert craftsmanship make these the perfect everyday pair.</p>
-                    
-                    <div style="margin-top: 2rem;">
-                        <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">Add to Cart</button>
+        const allImgs = product.images && product.images.length > 0 ? product.images : [product.image];
+        let activeIdx = 0;
+
+        function buildGalleryHTML(idx) {
+            const thumbsHtml = allImgs.map((src, i) =>
+                `<img src="${src}" class="qv-thumb ${i === idx ? 'active' : ''}" onclick="window.switchQvImg(${i})" alt="View ${i+1}">`
+            ).join('');
+            return `
+                <div class="qv-grid">
+                    <div class="qv-img-col">
+                        <div class="qv-main-img-wrap">
+                            <img src="${allImgs[idx]}" alt="${product.name}" id="qv-main-img" class="qv-main-img">
+                        </div>
+                        <div class="qv-thumbs">${thumbsHtml}</div>
                     </div>
-                    <div style="margin-top: 1rem;">
-                        <button class="btn btn-outline w-100" onclick="alert('Added to wishlist!')"><i class="ph ph-heart"></i> Add to Wishlist</button>
+                    <div class="qv-details">
+                        <p class="product-category">${product.category} &mdash; ${product.shape}</p>
+                        <h3>${product.name}</h3>
+                        <p class="qv-code">Code: ${product.code}</p>
+                        <div class="qv-price">₹${product.price.toLocaleString()} <span class="product-tax">Incl of taxes</span></div>
+                        <p style="color:var(--text-muted); margin-top:0.75rem; line-height:1.7;">${product.desc}</p>
+                        <div class="qv-meta">
+                            <span><strong>Size:</strong> ${product.size}</span>
+                            <span><strong>Gender:</strong> ${product.gender.charAt(0).toUpperCase() + product.gender.slice(1)}</span>
+                            ${product.badge ? `<span class="card-badge badge-${product.badge}" style="position:static;margin:0;">${formatBadgeName(product.badge)}</span>` : ''}
+                        </div>
+                        <div style="margin-top: 1.5rem;">
+                            <button class="btn btn-primary w-100" onclick="addToCart(${product.id})"><i class="ph ph-storefront"></i> Visit Store to Purchase</button>
+                        </div>
+                        <div style="margin-top: 0.75rem;">
+                            <button class="btn btn-outline w-100" onclick="alert('Added to wishlist!')"><i class="ph ph-heart"></i> Add to Wishlist</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-        
+            `;
+        }
+
+        window.switchQvImg = (idx) => {
+            activeIdx = idx;
+            const mainImg = document.getElementById('qv-main-img');
+            if (mainImg) mainImg.src = allImgs[idx];
+            document.querySelectorAll('.qv-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+        };
+
+        qvContent.innerHTML = buildGalleryHTML(activeIdx);
         qvOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     };
 
     window.addToCart = (productId) => {
-        // Simple mock cart interaction
-        const countSpan = document.querySelector('.cart-count');
-        let count = parseInt(countSpan.textContent);
-        countSpan.textContent = count + 1;
-        
-        const emptyMsg = document.querySelector('.empty-cart-msg');
-        if(emptyMsg) emptyMsg.style.display = 'none';
-        
+        // Close quick view if open
         closeQuickView();
-        toggleCart();
+        // Show visit store modal
+        showVisitStoreModal();
     };
+
+    function showVisitStoreModal() {
+        let modal = document.getElementById('visit-store-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'visit-store-modal';
+            modal.className = 'visit-store-overlay';
+            modal.innerHTML = `
+                <div class="visit-store-modal">
+                    <button class="close-visit-store" aria-label="Close">&times;</button>
+                    <div class="vsm-icon"><i class="ph ph-storefront"></i></div>
+                    <h3>Visit Our Store to Purchase</h3>
+                    <p>We'd love to help you find the perfect frame in person! Our optical experts are ready to assist you with fitting, prescription, and style advice.</p>
+                    <div class="vsm-details">
+                        <div class="vsm-detail-row">
+                            <i class="ph ph-map-pin"></i>
+                            <span>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, JP NAGAR, Bengaluru</span>
+                        </div>
+                        <div class="vsm-detail-row">
+                            <i class="ph ph-phone"></i>
+                            <a href="tel:+918884111108">+91 8884111108</a>
+                        </div>
+                        <div class="vsm-detail-row">
+                            <i class="ph ph-clock"></i>
+                            <span>Mon – Sun: 10:30 AM – 9:30 PM</span>
+                        </div>
+                    </div>
+                    <div class="vsm-actions">
+                        <a href="https://maps.google.com/?q=LensHut+JP+Nagar+Bengaluru" target="_blank" class="btn btn-primary"><i class="ph ph-navigation-arrow"></i> Get Directions</a>
+                        <a href="tel:+918884111108" class="btn btn-outline"><i class="ph ph-phone"></i> Call Now</a>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            modal.querySelector('.close-visit-store').addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Make showVisitStoreModal accessible globally (for product card buttons)
+    window.showVisitStoreModal = showVisitStoreModal;
+
 
 
     /* ==========================================================================
@@ -158,32 +229,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortSelect = document.getElementById('sort-select');
     const clearFiltersBtn = document.querySelector('.clear-filters');
 
-    function renderShop(productsToRender) {
+    // Pagination state
+    const ITEMS_PER_PAGE = 12;
+    let currentPage = 1;
+    let currentFilteredProducts = [];
+
+    function renderShop(productsToRender, page) {
         if (!productGrid) return;
-        
+        page = page || 1;
+        currentPage = page;
+        currentFilteredProducts = productsToRender;
+
         if (productsToRender.length === 0) {
             productGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No products match your criteria.</div>';
-            countDisplay.textContent = '0';
+            if (countDisplay) countDisplay.textContent = '0';
+            renderPagination(0, 1);
             return;
         }
 
+        const totalPages = Math.ceil(productsToRender.length / ITEMS_PER_PAGE);
+        const start = (page - 1) * ITEMS_PER_PAGE;
+        const pageProducts = productsToRender.slice(start, start + ITEMS_PER_PAGE);
+
         let html = '';
-        productsToRender.forEach(p => {
-            html += generateProductCardHTML(p);
-        });
+        pageProducts.forEach(p => { html += generateProductCardHTML(p); });
         productGrid.innerHTML = html;
-        countDisplay.textContent = productsToRender.length;
+        if (countDisplay) countDisplay.textContent = productsToRender.length;
+
+        renderPagination(totalPages, page);
+
+        // Scroll to top of grid smoothly
+        if (page > 1) {
+            productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
+
+    function renderPagination(totalPages, page) {
+        let paginationEl = document.getElementById('pagination-controls');
+        if (!paginationEl) {
+            paginationEl = document.createElement('div');
+            paginationEl.id = 'pagination-controls';
+            paginationEl.className = 'pagination-controls';
+            if (productGrid && productGrid.parentNode) {
+                productGrid.parentNode.insertBefore(paginationEl, productGrid.nextSibling);
+            }
+        }
+
+        if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
+
+        let html = `<button class="pg-btn" id="pg-prev" ${page <= 1 ? 'disabled' : ''} onclick="changePage(${page - 1})"><i class="ph ph-caret-left"></i></button>`;
+
+        const delta = 2;
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= page - delta && i <= page + delta)) {
+                html += `<button class="pg-btn pg-num ${i === page ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+            } else if (i === page - delta - 1 || i === page + delta + 1) {
+                html += `<span class="pg-ellipsis">…</span>`;
+            }
+        }
+
+        html += `<button class="pg-btn" id="pg-next" ${page >= totalPages ? 'disabled' : ''} onclick="changePage(${page + 1})"><i class="ph ph-caret-right"></i></button>`;
+        paginationEl.innerHTML = html;
+    }
+
+    window.changePage = (page) => {
+        renderShop(currentFilteredProducts, page);
+    };
 
     function filterAndSortProducts() {
         let filtered = [...products];
 
         // Gather active filters
-        const activeFilters = {
-            category: [],
-            shape: [],
-            gender: []
-        };
+        const activeFilters = { category: [], shape: [], gender: [] };
 
         filterCheckboxes.forEach(cb => {
             if (cb.checked) {
@@ -192,7 +309,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Apply filters
+        // Active quick-filter tab
+        const activeTab = document.querySelector('.filter-tab.active');
+        if (activeTab) {
+            const tabFilter = activeTab.dataset.filter;
+            const tabType = activeTab.dataset.type;
+            if (tabFilter && tabFilter !== 'all' && tabType) {
+                activeFilters[tabType].push(tabFilter);
+            }
+        }
+
         if (activeFilters.category.length > 0) {
             filtered = filtered.filter(p => activeFilters.category.includes(p.category));
         }
@@ -200,44 +326,48 @@ document.addEventListener('DOMContentLoaded', () => {
             filtered = filtered.filter(p => activeFilters.shape.includes(p.shape));
         }
         if (activeFilters.gender.length > 0) {
-            // Note: Unisex is treated as both men and women in real-world, but for this mock we just exact match
             filtered = filtered.filter(p => activeFilters.gender.includes(p.gender));
         }
 
-        // Apply sort
-        const sortValue = sortSelect.value;
-        if (sortValue === 'price-low') {
-            filtered.sort((a, b) => a.price - b.price);
-        } else if (sortValue === 'price-high') {
-            filtered.sort((a, b) => b.price - a.price);
-        } else if (sortValue === 'new') {
-            filtered.sort((a, b) => (a.isNew === b.isNew) ? 0 : a.isNew ? -1 : 1);
+        if (sortSelect) {
+            const sortValue = sortSelect.value;
+            if (sortValue === 'price-low') filtered.sort((a, b) => a.price - b.price);
+            else if (sortValue === 'price-high') filtered.sort((a, b) => b.price - a.price);
+            else if (sortValue === 'new') filtered.sort((a, b) => (a.isNew === b.isNew) ? 0 : a.isNew ? -1 : 1);
         }
 
-        renderShop(filtered);
+        renderShop(filtered, 1); // Always reset to page 1 on filter/sort change
     }
+
+    // Quick filter tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            filterAndSortProducts();
+        });
+    });
 
     // Event Listeners for Filters
     if (filterCheckboxes.length > 0) {
-        filterCheckboxes.forEach(cb => {
-            cb.addEventListener('change', filterAndSortProducts);
-        });
+        filterCheckboxes.forEach(cb => { cb.addEventListener('change', filterAndSortProducts); });
     }
-
-    if (sortSelect) {
-        sortSelect.addEventListener('change', filterAndSortProducts);
-    }
-
+    if (sortSelect) { sortSelect.addEventListener('change', filterAndSortProducts); }
     if (clearFiltersBtn) {
         clearFiltersBtn.addEventListener('click', () => {
             filterCheckboxes.forEach(cb => cb.checked = false);
+            // Reset tabs too
+            filterTabs.forEach(t => t.classList.remove('active'));
+            const allTab = document.querySelector('.filter-tab[data-filter="all"]');
+            if (allTab) allTab.classList.add('active');
             filterAndSortProducts();
         });
     }
 
     // Initial render
     if (productGrid && typeof products !== 'undefined') {
-        renderShop(products);
+        renderShop(products, 1);
     }
 
     function formatBadgeName(badge) {
@@ -257,23 +387,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return `
             <div class="product-card">
                 ${badgeHTML}
-                <div class="product-img-wrap">
+                <div class="product-img-wrap" onclick="openQuickView(${product.id})" style="cursor:pointer;">
                     <img src="${product.image}" alt="${product.name}" class="primary-img">
+                    <div class="card-hover-overlay"><i class="ph ph-eye"></i> Quick View</div>
                 </div>
                 <div class="product-info">
                     <div class="product-brand">${product.brand}</div>
                     <h3 class="product-title" title="${product.desc}">${displayDesc}</h3>
-                    <p class="product-size">Size: ${product.size}</p>
+                    <p class="product-size">Size: ${product.size} &nbsp;|&nbsp; ${product.shape.charAt(0).toUpperCase() + product.shape.slice(1)}</p>
                     
                     <div class="product-footer">
                         <div class="product-price-section">
                             <span class="product-price">₹${product.price.toLocaleString()}</span>
                             <span class="product-tax">Incl of taxes</span>
                         </div>
-                        <div class="product-actions">
-                            <button class="action-circle" title="Wishlist"><i class="ph ph-heart"></i></button>
-                            <button class="action-circle" title="Quick View" onclick="openQuickView(${product.id})"><i class="ph ph-squares-four"></i></button>
-                        </div>
+                        <button class="btn-visit-store" onclick="showVisitStoreModal()" title="Visit Store to Purchase">
+                            <i class="ph ph-storefront"></i> Buy In-Store
+                        </button>
                     </div>
                 </div>
             </div>
