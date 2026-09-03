@@ -374,6 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showVisitStoreModal() {
+        const qvOverlay = document.querySelector('.quick-view-overlay');
+        if (qvOverlay) {
+            qvOverlay.classList.remove('active');
+        }
         let modal = document.getElementById('visit-store-modal');
         if (!modal) {
             modal = document.createElement('div');
