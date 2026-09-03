@@ -248,83 +248,148 @@ document.addEventListener('DOMContentLoaded', () => {
             </button>
         `).join('');
 
-        const storeListHtml = filteredStores.map(store => `
-            <div class="nsl-store-item ${store.id === activeStore.id ? 'active' : ''}" onclick="window.selectNearStore('${store.id}')">
+        const storeListHtml = filteredStores.map(store => {
+            const isSelected = store.id === activeStore.id;
+            const storeWaText = encodeURIComponent(`Hi LensHut, I'm interested in eyewear and would like to visit your ${store.name} branch.`);
+            return `
+            <div class="nsl-store-item ${isSelected ? 'active' : ''}" onclick="window.selectNearStore('${store.id}')" data-store-id="${store.id}">
                 <div class="nsl-store-item-header">
-                    <h4>${store.name}</h4>
-                    <span class="nsl-city-badge">${store.city}</span>
-                </div>
-                <p class="nsl-store-item-sub"><i class="ph ph-map-pin"></i> ${store.area}</p>
-                <div class="nsl-store-item-quick-actions">
-                    <span><i class="ph ph-phone"></i> ${store.displayPhone}</span>
-                </div>
-            </div>
-        `).join('');
-
-        const waText = encodeURIComponent(`Hi LensHut, I'm interested in prescription frames and would like to visit your ${activeStore.name} branch.`);
-
-        return `
-            <div class="visit-store-modal nsl-modal">
-                <button class="close-visit-store" aria-label="Close">&times;</button>
-                <div class="nsl-header">
-                    <div class="nsl-icon"><i class="ph ph-storefront"></i></div>
-                    <div class="nsl-header-text">
-                        <h3>Near Store Locations</h3>
-                        <p>Select any store location below to view details, phone number, chat on WhatsApp, or call directly.</p>
+                    <div class="nsl-store-name-block">
+                        <div class="nsl-store-title-row">
+                            <h4>${store.name}</h4>
+                            <span class="nsl-city-badge">${store.city}</span>
+                        </div>
+                        <p class="nsl-store-item-sub"><i class="ph ph-map-pin"></i> ${store.area}</p>
+                    </div>
+                    <div class="nsl-store-status-icon" aria-label="${isSelected ? 'Collapse' : 'Expand'}">
+                        <i class="ph ${isSelected ? 'ph-caret-up' : 'ph-caret-down'}"></i>
                     </div>
                 </div>
 
-                <div class="nsl-city-bar">
-                    ${cityPillsHtml}
+                <!-- Desktop Compact Phone Indicator -->
+                <div class="nsl-store-desktop-quick">
+                    <span><i class="ph ph-phone"></i> ${store.displayPhone}</span>
                 </div>
 
-                <div class="nsl-body-grid">
-                    <div class="nsl-list-col">
-                        <label class="nsl-col-title"><i class="ph ph-list-dashes"></i> Choose Store Location:</label>
-                        <div class="nsl-store-list">
-                            ${storeListHtml}
+                <!-- Mobile Expandable Accordion Body (Shown on mobile when active) -->
+                <div class="nsl-mobile-expanded-content">
+                    <div class="nsl-mobile-badge"><i class="ph-bold ph-check"></i> Selected Store</div>
+                    
+                    <div class="nsl-details-box nsl-mobile-details-box">
+                        <div class="nsl-detail-row">
+                            <i class="ph ph-map-pin"></i>
+                            <div>
+                                <strong>Address:</strong>
+                                <p>${store.address}</p>
+                            </div>
+                        </div>
+                        <div class="nsl-detail-row">
+                            <i class="ph ph-clock"></i>
+                            <div>
+                                <strong>Store Timings:</strong>
+                                <p>${store.hours}</p>
+                            </div>
+                        </div>
+                        <div class="nsl-detail-row">
+                            <i class="ph ph-phone"></i>
+                            <div>
+                                <strong>Phone:</strong>
+                                <p><a href="tel:${store.phone}" class="nsl-phone-text" onclick="event.stopPropagation()">${store.displayPhone}</a></p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="nsl-detail-col">
-                        <div class="nsl-detail-card">
-                            <div class="nsl-detail-badge"><i class="ph ph-check-circle"></i> Selected Store</div>
-                            <h3 class="nsl-detail-title">${activeStore.name}</h3>
+                    <div class="nsl-mobile-actions-wrapper">
+                        <a href="https://wa.me/${store.whatsapp}?text=${storeWaText}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-whatsapp btn-nsl-mobile-primary" onclick="event.stopPropagation()">
+                            <i class="ph-fill ph-whatsapp-logo"></i> Chat on WhatsApp
+                        </a>
+                        <div class="nsl-mobile-secondary-actions">
+                            <a href="tel:${store.phone}" class="btn-nsl btn-nsl-call" onclick="event.stopPropagation()">
+                                <i class="ph-fill ph-phone-call"></i> Call Now
+                            </a>
+                            <a href="${store.mapUrl}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-map" onclick="event.stopPropagation()">
+                                <i class="ph-fill ph-navigation-arrow"></i> Directions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
 
-                            <div class="nsl-details-box">
-                                <div class="nsl-detail-row">
-                                    <i class="ph ph-map-pin"></i>
-                                    <div>
-                                        <strong>Address:</strong>
-                                        <p>${activeStore.address}</p>
-                                    </div>
-                                </div>
-                                <div class="nsl-detail-row">
-                                    <i class="ph ph-clock"></i>
-                                    <div>
-                                        <strong>Store Timings:</strong>
-                                        <p>${activeStore.hours}</p>
-                                    </div>
-                                </div>
-                                <div class="nsl-detail-row">
-                                    <i class="ph ph-phone"></i>
-                                    <div>
-                                        <strong>Phone Number:</strong>
-                                        <p><a href="tel:${activeStore.phone}" class="nsl-phone-text">${activeStore.displayPhone}</a></p>
-                                    </div>
-                                </div>
+        const activeWaText = encodeURIComponent(`Hi LensHut, I'm interested in prescription frames and would like to visit your ${activeStore.name} branch.`);
+
+        return `
+            <div class="visit-store-modal nsl-modal">
+                <div class="nsl-sheet-drag-handle"></div>
+                <button class="close-visit-store" aria-label="Close" title="Close"><i class="ph ph-x"></i></button>
+                
+                <div class="nsl-fixed-top">
+                    <div class="nsl-header">
+                        <div class="nsl-icon"><i class="ph ph-storefront"></i></div>
+                        <div class="nsl-header-text">
+                            <h3>Near Store Locations</h3>
+                            <p>Select any store to view timings, WhatsApp, or call directly.</p>
+                        </div>
+                    </div>
+
+                    <div class="nsl-city-bar-wrapper">
+                        <div class="nsl-city-bar">
+                            ${cityPillsHtml}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nsl-modal-scrollable">
+                    <div class="nsl-body-grid">
+                        <div class="nsl-list-col">
+                            <label class="nsl-col-title"><i class="ph ph-list-dashes"></i> Choose Store Location:</label>
+                            <div class="nsl-store-list">
+                                ${storeListHtml}
                             </div>
+                        </div>
 
-                            <div class="nsl-actions-grid">
-                                <a href="https://wa.me/${activeStore.whatsapp}?text=${waText}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-whatsapp">
-                                    <i class="ph-fill ph-whatsapp-logo"></i> WhatsApp
-                                </a>
-                                <a href="tel:${activeStore.phone}" class="btn-nsl btn-nsl-call">
-                                    <i class="ph-fill ph-phone-call"></i> Call Now
-                                </a>
-                                <a href="${activeStore.mapUrl}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-map">
-                                    <i class="ph-fill ph-navigation-arrow"></i> Directions
-                                </a>
+                        <!-- Desktop Detail Column -->
+                        <div class="nsl-detail-col">
+                            <div class="nsl-detail-card">
+                                <div class="nsl-detail-badge"><i class="ph ph-check-circle"></i> Selected Store</div>
+                                <h3 class="nsl-detail-title">${activeStore.name}</h3>
+
+                                <div class="nsl-details-box">
+                                    <div class="nsl-detail-row">
+                                        <i class="ph ph-map-pin"></i>
+                                        <div>
+                                            <strong>Address:</strong>
+                                            <p>${activeStore.address}</p>
+                                        </div>
+                                    </div>
+                                    <div class="nsl-detail-row">
+                                        <i class="ph ph-clock"></i>
+                                        <div>
+                                            <strong>Store Timings:</strong>
+                                            <p>${activeStore.hours}</p>
+                                        </div>
+                                    </div>
+                                    <div class="nsl-detail-row">
+                                        <i class="ph ph-phone"></i>
+                                        <div>
+                                            <strong>Phone Number:</strong>
+                                            <p><a href="tel:${activeStore.phone}" class="nsl-phone-text">${activeStore.displayPhone}</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="nsl-actions-grid">
+                                    <a href="https://wa.me/${activeStore.whatsapp}?text=${activeWaText}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-whatsapp">
+                                        <i class="ph-fill ph-whatsapp-logo"></i> WhatsApp
+                                    </a>
+                                    <a href="tel:${activeStore.phone}" class="btn-nsl btn-nsl-call">
+                                        <i class="ph-fill ph-phone-call"></i> Call Now
+                                    </a>
+                                    <a href="${activeStore.mapUrl}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-map">
+                                        <i class="ph-fill ph-navigation-arrow"></i> Directions
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -335,7 +400,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.selectNearStore = (storeId) => {
         currentSelectedStoreId = storeId;
+        const scrollable = document.querySelector('.nsl-modal-scrollable');
+        const scrollPos = scrollable ? scrollable.scrollTop : 0;
+        
         refreshNearStoreModal();
+
+        const newScrollable = document.querySelector('.nsl-modal-scrollable');
+        if (newScrollable && scrollPos > 0) {
+            newScrollable.scrollTop = scrollPos;
+        }
+
+        if (window.innerWidth <= 768) {
+            setTimeout(() => {
+                const activeCard = document.querySelector(`.nsl-store-item[data-store-id="${storeId}"]`);
+                if (activeCard) {
+                    activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 60);
+        }
     };
 
     window.filterNearStoreCity = (cityId) => {
@@ -347,6 +429,10 @@ document.addEventListener('DOMContentLoaded', () => {
             currentSelectedStoreId = matching[0].id;
         }
         refreshNearStoreModal();
+        const scrollable = document.querySelector('.nsl-modal-scrollable');
+        if (scrollable) {
+            scrollable.scrollTop = 0;
+        }
     };
 
     function refreshNearStoreModal() {

@@ -2691,7 +2691,6 @@ button {
     max-width: 880px;
     width: 100%;
     max-height: 88vh;
-    overflow-y: auto;
     padding: 2.25rem 2.5rem;
     text-align: left;
     border-radius: 24px;
@@ -2700,32 +2699,71 @@ button {
     position: relative;
     transform: translateY(20px) scale(0.98);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .visit-store-overlay.active .visit-store-modal.nsl-modal {
     transform: translateY(0) scale(1);
 }
 
+.nsl-sheet-drag-handle {
+    display: none;
+}
+
+.nsl-fixed-top {
+    flex-shrink: 0;
+}
+
+.nsl-city-bar-wrapper {
+    width: 100%;
+}
+
+.nsl-modal-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 0.25rem;
+}
+
+.nsl-store-status-icon {
+    display: none;
+}
+
+.nsl-mobile-expanded-content {
+    display: none;
+}
+
+.nsl-store-desktop-quick {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #222222;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
 /* Custom Scrollbars */
-.nsl-modal::-webkit-scrollbar,
+.nsl-modal-scrollable::-webkit-scrollbar,
 .nsl-store-list::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
 
-.nsl-modal::-webkit-scrollbar-track,
+.nsl-modal-scrollable::-webkit-scrollbar-track,
 .nsl-store-list::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 99px;
 }
 
-.nsl-modal::-webkit-scrollbar-thumb,
+.nsl-modal-scrollable::-webkit-scrollbar-thumb,
 .nsl-store-list::-webkit-scrollbar-thumb {
     background: #cccccc;
     border-radius: 99px;
 }
 
-.nsl-modal::-webkit-scrollbar-thumb:hover,
+.nsl-modal-scrollable::-webkit-scrollbar-thumb:hover,
 .nsl-store-list::-webkit-scrollbar-thumb:hover {
     background: #999999;
 }
@@ -3503,75 +3541,395 @@ img, video, iframe {
         text-align: center;
     }
 
-    /* Near Store Location Modal (NSL) */
+    /* ==========================================================================
+       Near Store Location Modal (NSL) - Mobile Bottom Sheet & In-Place Cards
+       ========================================================================== */
+    .visit-store-overlay {
+        padding: 0;
+        align-items: flex-end; /* Native bottom sheet positioning */
+    }
+
     .visit-store-modal.nsl-modal {
-        padding: 1.5rem 1.15rem;
-        max-height: 90vh;
-        width: 95%;
-        border-radius: 18px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100% !important;
+        width: 100% !important;
+        max-height: 88vh;
+        height: auto;
+        padding: 0;
+        border-radius: 24px 24px 0 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.35);
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: #ffffff !important;
+        z-index: 10001;
     }
+
+    .visit-store-overlay.active .visit-store-modal.nsl-modal {
+        transform: translateY(0);
+    }
+
+    /* Native Pull / Drag Handle at top of sheet */
+    .nsl-sheet-drag-handle {
+        display: block;
+        width: 42px;
+        height: 5px;
+        background: #e2e2e2;
+        border-radius: 99px;
+        margin: 10px auto 4px;
+        flex-shrink: 0;
+    }
+
+    /* Pinned / Sticky Top Area inside sheet */
+    .nsl-fixed-top {
+        padding: 0 1.25rem;
+        background: #ffffff;
+        border-bottom: 1px solid #f0f0f0;
+        flex-shrink: 0;
+        position: relative;
+    }
+
     .close-visit-store {
-        top: 1rem;
-        right: 1rem;
-        width: 34px;
-        height: 34px;
-        font-size: 1.2rem;
+        top: 0.85rem;
+        right: 1.15rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+        background: #f4f4f4;
+        color: #333333;
+        z-index: 30;
     }
+
+    .close-visit-store:hover {
+        background: #1e1e1e;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
     .nsl-header {
-        gap: 0.75rem;
-        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 0.75rem;
         padding-bottom: 0.75rem;
+        padding-right: 2.75rem; /* prevent close button overlap */
+        border-bottom: none;
     }
+
     .nsl-icon {
         width: 44px;
         height: 44px;
         font-size: 1.35rem;
-        border-radius: 10px;
+        border-radius: 12px;
+        flex-shrink: 0;
     }
+
     .nsl-header-text h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #111111;
+        margin: 0 0 0.2rem 0;
+        letter-spacing: -0.01em;
     }
+
     .nsl-header-text p {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
+        color: #666666;
+        line-height: 1.35;
+        margin: 0;
     }
-    .nsl-city-bar {
+
+    /* Single-row horizontally swipeable City Filter Bar */
+    .nsl-city-bar-wrapper {
+        width: 100%;
+        overflow: hidden;
         padding-bottom: 0.75rem;
-        margin-bottom: 1rem;
+    }
+
+    .nsl-city-bar {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        margin-bottom: 0;
+        padding-bottom: 4px;
+        border-bottom: none;
+        scrollbar-width: none;
+    }
+
+    .nsl-city-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nsl-city-btn {
+        flex-shrink: 0;
+        padding: 0.42rem 0.95rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border-radius: 999px;
+        white-space: nowrap;
+        background: #f7f7f7;
+        border: 1px solid #e2e2e2;
+        color: #555555;
+    }
+
+    .nsl-city-btn.active {
+        background: #1e1e1e;
+        color: #ffffff;
+        border-color: #1e1e1e;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Single Scrollable Container (NO nested scroll trap!) */
+    .nsl-modal-scrollable {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 1rem 1.25rem 2.25rem;
+    }
+
+    .nsl-body-grid {
+        display: block;
+    }
+
+    .nsl-list-col {
+        width: 100%;
+    }
+
+    .nsl-col-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #888888;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
         gap: 0.4rem;
     }
-    .nsl-city-btn {
-        padding: 0.35rem 0.85rem;
-        font-size: 0.78rem;
-    }
-    .nsl-body-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
+
     .nsl-store-list {
-        max-height: 190px;
+        max-height: none; /* No artificial 190px cap! */
+        overflow-y: visible;
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
-    .nsl-detail-card {
-        padding: 1.25rem;
+
+    /* Hide separate Desktop Detail Column on Mobile */
+    .nsl-detail-col {
+        display: none !important;
     }
-    .nsl-detail-title {
-        font-size: 1.25rem;
+
+    /* Store Cards */
+    .nsl-store-item {
+        padding: 1rem 1.15rem;
+        border-radius: 16px;
+        background: #fcfcfc;
+        border: 1.5px solid #ececec;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        transform: none !important;
+    }
+
+    .nsl-store-item:hover {
+        transform: none !important;
+    }
+
+    .nsl-store-item.active {
+        border-color: #1e1e1e;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .nsl-store-item.active::before {
+        display: none;
+    }
+
+    .nsl-store-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .nsl-store-name-block {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .nsl-store-title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.35rem;
+    }
+
+    .nsl-store-title-row h4 {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: #111111;
+        margin: 0;
+    }
+
+    .nsl-store-status-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #f2f2f2;
+        color: #666666;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+    }
+
+    .nsl-store-item.active .nsl-store-status-icon {
+        background: #1e1e1e;
+        color: #ffffff;
+    }
+
+    .nsl-store-item-sub {
+        font-size: 0.8rem;
+        color: #666666;
+        margin: 0;
+        line-height: 1.35;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    /* Hide desktop quick indicator on mobile */
+    .nsl-store-desktop-quick {
+        display: none;
+    }
+
+    /* Mobile Expandable Accordion Content */
+    .nsl-mobile-expanded-content {
+        display: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #f0f0f0;
+        animation: nslFadeIn 0.25s ease;
+    }
+
+    .nsl-store-item.active .nsl-mobile-expanded-content {
+        display: block;
+    }
+
+    .nsl-mobile-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: #e8f5e9;
+        color: #1b5e20;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.75rem;
+    }
+
+    .nsl-mobile-details-box {
+        background: #f8f9fa;
+        border: 1px solid #ededed;
+        border-radius: 14px;
+        padding: 0.9rem 1rem;
+        gap: 0.75rem;
         margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
     }
-    .nsl-details-box {
-        padding: 1rem;
-        gap: 0.85rem;
-        margin-bottom: 1.25rem;
+
+    .nsl-mobile-details-box .nsl-detail-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
     }
-    .nsl-detail-row p {
+
+    .nsl-mobile-details-box .nsl-detail-row i {
+        font-size: 1.15rem;
+        color: #1e1e1e;
+        margin-top: 0.1rem;
+        flex-shrink: 0;
+    }
+
+    .nsl-mobile-details-box .nsl-detail-row strong {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #777777;
+        margin-bottom: 0.15rem;
+    }
+
+    .nsl-mobile-details-box .nsl-detail-row p {
+        font-size: 0.84rem;
+        color: #222222;
+        margin: 0;
+        line-height: 1.45;
+        font-weight: 500;
+    }
+
+    .nsl-mobile-details-box .nsl-phone-text {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #111111;
+        text-decoration: none;
+    }
+
+    /* Mobile Action Button Group */
+    .nsl-mobile-actions-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+    }
+
+    .btn-nsl-mobile-primary {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    .nsl-mobile-secondary-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
+    }
+
+    .nsl-mobile-secondary-actions .btn-nsl {
+        padding: 0.75rem 0.5rem;
         font-size: 0.85rem;
+        border-radius: 12px;
     }
-    .nsl-actions-grid {
-        grid-template-columns: 1fr;
-        gap: 0.6rem;
-    }
-    .btn-nsl {
-        padding: 0.75rem 1rem;
-        font-size: 0.88rem;
+
+    @keyframes nslFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* Quick View Modal */
@@ -3705,7 +4063,23 @@ img, video, iframe {
         font-size: 0.75rem;
         gap: 0.25rem;
     }
+    .visit-store-modal.nsl-modal {
+        max-height: 92vh;
+    }
+    .nsl-fixed-top {
+        padding: 0 1rem;
+    }
+    .nsl-modal-scrollable {
+        padding: 0.85rem 1rem 2rem;
+    }
     .nsl-header-text h3 {
         font-size: 1.15rem;
+    }
+    .nsl-store-item {
+        padding: 0.85rem 0.95rem;
+    }
+    .btn-nsl-mobile-primary {
+        padding: 0.8rem 0.85rem;
+        font-size: 0.88rem;
     }
 }
