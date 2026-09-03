@@ -2709,152 +2709,417 @@ button {
     pointer-events: all;
 }
 
-.visit-store-modal {
-    background: var(--clr-white);
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
-    max-width: 480px;
+/* ==========================================================================
+   Near Store Location Button (Product Card)
+   ========================================================================== */
+.product-footer {
+    display: flex;
     width: 100%;
-    position: relative;
-    text-align: center;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    margin-top: auto;
+    padding-top: 0.5rem;
 }
 
-.visit-store-overlay.active .visit-store-modal {
-    transform: translateY(0);
+.btn-near-store {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    background: var(--clr-primary);
+    color: var(--clr-white);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    letter-spacing: 0.02em;
+}
+
+.btn-near-store:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-near-store i {
+    font-size: 1.05rem;
+    color: var(--clr-accent);
+}
+
+/* Store action buttons on index.html store cards */
+.store-action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-store-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.85rem;
+    background: #25D366;
+    color: #fff !important;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-store-wa:hover {
+    background: #20b858;
+    transform: translateY(-1px);
+}
+
+.btn-store-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--clr-primary);
+    color: #fff !important;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-store-call:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Near Store Locations Modal (NSL)
+   ========================================================================== */
+.visit-store-modal.nsl-modal {
+    max-width: 840px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2.25rem;
+    text-align: left;
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
 }
 
 .close-visit-store {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: #f1f1f1;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
     color: var(--clr-secondary);
     line-height: 1;
-    padding: 0.25rem;
-    transition: color var(--transition-fast);
-}
-
-.close-visit-store:hover {
-    color: var(--clr-primary);
-}
-
-.vsm-icon {
-    width: 72px;
-    height: 72px;
-    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.25rem;
+    transition: all var(--transition-fast);
 }
 
-.vsm-icon i {
-    font-size: 2rem;
+.close-visit-store:hover {
+    background: var(--clr-primary);
     color: var(--clr-white);
 }
 
-.visit-store-modal h3 {
-    font-size: 1.4rem;
+.nsl-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.nsl-icon {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nsl-icon i {
+    font-size: 1.75rem;
+    color: var(--clr-white);
+}
+
+.nsl-header-text h3 {
+    font-size: 1.45rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
     color: var(--clr-primary);
 }
 
-.visit-store-modal > p {
+.nsl-header-text p {
+    font-size: 0.875rem;
     color: var(--clr-secondary);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    margin: 0;
 }
 
-.vsm-details {
+.nsl-city-bar {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--clr-border);
+}
+
+.nsl-city-btn {
+    padding: 0.4rem 1rem;
+    border: 1.5px solid var(--clr-border);
+    background: var(--clr-white);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--clr-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.nsl-city-btn:hover {
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
+}
+
+.nsl-city-btn.active {
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
+    color: var(--clr-white);
+}
+
+.nsl-body-grid {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.nsl-col-title {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--clr-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.nsl-store-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 0.4rem;
+}
+
+.nsl-store-item {
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--clr-border);
+    border-radius: 12px;
+    background: #fafafa;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.nsl-store-item:hover {
+    border-color: #999;
+    background: #fff;
+    transform: translateX(3px);
+}
+
+.nsl-store-item.active {
+    border-color: var(--clr-primary);
+    background: var(--clr-white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.nsl-store-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.nsl-store-item-header h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+    margin: 0;
+}
+
+.nsl-city-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: #ececec;
+    color: #444;
+}
+
+.nsl-store-item-sub {
+    font-size: 0.78rem;
+    color: var(--clr-secondary);
+    margin: 0 0 0.4rem 0;
+    line-height: 1.35;
+}
+
+.nsl-store-item-quick-actions {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--clr-primary);
+}
+
+/* Right Detail Card */
+.nsl-detail-card {
+    background: #fdfdfd;
+    border: 1.5px solid var(--clr-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.nsl-detail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.nsl-detail-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+    margin-bottom: 1.25rem;
+}
+
+.nsl-details-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     background: #f8f8f8;
     border-radius: 12px;
     padding: 1.25rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
     margin-bottom: 1.5rem;
 }
 
-.vsm-detail-row {
+.nsl-detail-row {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
+}
+
+.nsl-detail-row i {
+    font-size: 1.25rem;
+    color: var(--clr-primary);
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+.nsl-detail-row strong {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--clr-secondary);
+    margin-bottom: 0.2rem;
+}
+
+.nsl-detail-row p {
     font-size: 0.9rem;
     color: var(--clr-primary);
+    margin: 0;
+    line-height: 1.45;
 }
 
-.vsm-detail-row i {
-    font-size: 1.1rem;
-    color: var(--clr-secondary);
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-}
-
-.vsm-detail-row a {
+.nsl-phone-text {
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--clr-primary);
     text-decoration: none;
-    font-weight: 600;
 }
 
-.vsm-detail-row a:hover {
+.nsl-phone-text:hover {
     text-decoration: underline;
 }
 
-.vsm-actions {
-    display: flex;
+.nsl-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
-.vsm-actions .btn {
-    flex: 1;
-    min-width: 140px;
-    display: flex;
+.btn-nsl {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-}
-
-/* ==========================================================================
-   Buy In-Store Button (Product Card)
-   ========================================================================== */
-.btn-visit-store {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.45rem 0.9rem;
-    background: var(--clr-primary);
-    color: var(--clr-white);
-    border: none;
-    border-radius: 999px;
+    gap: 0.45rem;
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
     font-family: var(--font-body);
-    font-size: 0.78rem;
+    font-size: 0.88rem;
     font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
     transition: all var(--transition-fast);
-    white-space: nowrap;
-    letter-spacing: 0.02em;
 }
 
-.btn-visit-store:hover {
+.btn-nsl-whatsapp {
+    background: #25D366;
+    color: #ffffff !important;
+}
+
+.btn-nsl-whatsapp:hover {
+    background: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
+.btn-nsl-call {
+    background: var(--clr-primary);
+    color: #ffffff !important;
+}
+
+.btn-nsl-call:hover {
     background: #333;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.btn-visit-store i {
-    font-size: 0.9rem;
+.btn-nsl-map {
+    background: #ffffff;
+    border: 1.5px solid var(--clr-border);
+    color: var(--clr-primary) !important;
+}
+
+.btn-nsl-map:hover {
+    border-color: var(--clr-primary);
+    background: #f7f7f7;
+    transform: translateY(-2px);
 }
 
 /* Card hover overlay (Quick View on image hover) */
@@ -2948,12 +3213,21 @@ button {
     .product-title {
         font-size: 0.85rem;
     }
-    .product-price {
-        font-size: 1rem;
+    .btn-near-store {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.78rem;
     }
-    .btn-visit-store {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.7rem;
+    .visit-store-modal.nsl-modal {
+        padding: 1.5rem 1rem;
+    }
+    .nsl-body-grid {
+        grid-template-columns: 1fr;
+    }
+    .nsl-actions-grid {
+        grid-template-columns: 1fr;
+    }
+    .nsl-store-list {
+        max-height: 220px;
     }
     .editorial-layout {
         grid-template-columns: 1fr;

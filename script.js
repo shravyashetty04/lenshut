@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="product-category">${product.category} &mdash; ${product.shape}</p>
                         <h3>${product.name}</h3>
                         <p class="qv-code">Code: ${product.code}</p>
-                        <div class="qv-price">₹${product.price.toLocaleString()} <span class="product-tax">Incl of taxes</span></div>
                         <p style="color:var(--text-muted); margin-top:0.75rem; line-height:1.7;">${product.desc}</p>
                         <div class="qv-meta">
                             <span><strong>Size:</strong> ${product.size}</span>
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${product.badge ? `<span class="card-badge badge-${product.badge}" style="position:static;margin:0;">${formatBadgeName(product.badge)}</span>` : ''}
                         </div>
                         <div style="margin-top: 1.5rem;">
-                            <button class="btn btn-primary w-100" onclick="addToCart(${product.id})"><i class="ph ph-storefront"></i> Visit Store to Purchase</button>
+                            <button class="btn btn-primary w-100" onclick="showVisitStoreModal()"><i class="ph ph-map-pin"></i> Near Store Location</button>
                         </div>
                         <div style="margin-top: 0.75rem;">
                             <button class="btn btn-outline w-100" onclick="alert('Added to wishlist!')"><i class="ph ph-heart"></i> Add to Wishlist</button>
@@ -137,57 +136,260 @@ document.addEventListener('DOMContentLoaded', () => {
         showVisitStoreModal();
     };
 
+    /* ==========================================================================
+       Near Store Locations (Excluding Tumkur)
+       ========================================================================== */
+    const nearStoreLocations = [
+        {
+            id: 'banashankari',
+            name: 'LensHut Banashankari',
+            city: 'Bengaluru',
+            area: 'Banashankari 2nd Stage, Bengaluru',
+            address: '2stage, 2 Block, 276/278 14 th main road, 80 Feet Rd, Banashankari, Bengaluru, Karnataka 560050',
+            phone: '9916901201',
+            displayPhone: '+91 9916901201',
+            whatsapp: '919916901201',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+Banashankari+Bengaluru'
+        },
+        {
+            id: 'jp-nagar',
+            name: 'LensHut JP Nagar',
+            city: 'Bengaluru',
+            area: 'JP Nagar 5th Phase, Bengaluru',
+            address: 'SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, 5th Phase, JPNAGAR, Bengaluru, Karnataka 560078',
+            phone: '9513106789',
+            displayPhone: '+91 9513106789',
+            whatsapp: '919513106789',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+JP+Nagar+Bengaluru'
+        },
+        {
+            id: 'malleshwaram',
+            name: 'LensHut Malleshwaram',
+            city: 'Bengaluru',
+            area: 'Margosa Rd, Malleshwaram, Bengaluru',
+            address: 'Om Mahaganapathi Complex, 17, Margosa Rd, Malleshwaram, Bengaluru, Karnataka 560003',
+            phone: '8041225517',
+            displayPhone: '080-41225517',
+            whatsapp: '918041225517',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+Malleshwaram+Bengaluru'
+        },
+        {
+            id: 'hsr',
+            name: 'LensHut HSR Layout',
+            city: 'Bengaluru',
+            area: 'HSR Layout 1st Sector, Bengaluru',
+            address: 'Ground floor, 27th Main Rd, Phase 3, Agara Village, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102',
+            phone: '8042134243',
+            displayPhone: '080-42134243',
+            whatsapp: '918042134243',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+HSR+Layout+Bengaluru'
+        },
+        {
+            id: 'kuvempu-nagara',
+            name: 'LensHut Kuvempu Nagara',
+            city: 'Mysuru',
+            area: 'Kuvempu Nagara, Mysuru',
+            address: 'Ground Floor, MIG 2, New Kantharaj Urs Rd, near Sri S Nijalingappa Circle, Kuvempu Nagara, Mysuru, Karnataka 570023',
+            phone: '8214260042',
+            displayPhone: '0821-4260042',
+            whatsapp: '918214260042',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+Kuvempu+Nagara+Mysuru'
+        },
+        {
+            id: 'urs-road',
+            name: 'LensHut URS Road',
+            city: 'Mysuru',
+            area: 'D Devaraj Urs Rd, Mysuru',
+            address: 'Shop No 9 D, D Devaraj Urs Rd, next to City Bus Stop, Subbarayanakere, Shivarampet, Mysuru, Karnataka 570001',
+            phone: '8214252040',
+            displayPhone: '0821-4252040',
+            whatsapp: '918214252040',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+URS+Road+Mysuru'
+        },
+        {
+            id: 'hassan',
+            name: 'LensHut Hassan',
+            city: 'Hassan',
+            area: 'Krishnaraja Pura, Hassan',
+            address: 'Ground Floor, No 198/A, Shankar Mutt Rd, Krishnaraja Pura, Hassan, Karnataka 573201',
+            phone: '8172450094',
+            displayPhone: '08172-450094',
+            whatsapp: '918172450094',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
+            mapUrl: 'https://maps.google.com/?q=LensHut+Hassan'
+        }
+    ];
+
+    let currentSelectedStoreId = 'banashankari';
+    let currentCityFilter = 'all';
+
+    function buildNearStoreModalHTML() {
+        const activeStore = nearStoreLocations.find(s => s.id === currentSelectedStoreId) || nearStoreLocations[0];
+        const filteredStores = currentCityFilter === 'all'
+            ? nearStoreLocations
+            : nearStoreLocations.filter(s => s.city.toLowerCase() === currentCityFilter.toLowerCase());
+
+        const cities = [
+            { id: 'all', label: 'All Stores', count: nearStoreLocations.length },
+            { id: 'bengaluru', label: 'Bengaluru', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'bengaluru').length },
+            { id: 'mysuru', label: 'Mysuru', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'mysuru').length },
+            { id: 'hassan', label: 'Hassan', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'hassan').length }
+        ];
+
+        const cityPillsHtml = cities.map(c => `
+            <button class="nsl-city-btn ${currentCityFilter === c.id ? 'active' : ''}" onclick="window.filterNearStoreCity('${c.id}')">
+                ${c.label} (${c.count})
+            </button>
+        `).join('');
+
+        const storeListHtml = filteredStores.map(store => `
+            <div class="nsl-store-item ${store.id === activeStore.id ? 'active' : ''}" onclick="window.selectNearStore('${store.id}')">
+                <div class="nsl-store-item-header">
+                    <h4>${store.name}</h4>
+                    <span class="nsl-city-badge">${store.city}</span>
+                </div>
+                <p class="nsl-store-item-sub"><i class="ph ph-map-pin"></i> ${store.area}</p>
+                <div class="nsl-store-item-quick-actions">
+                    <span><i class="ph ph-phone"></i> ${store.displayPhone}</span>
+                </div>
+            </div>
+        `).join('');
+
+        const waText = encodeURIComponent(`Hi LensHut, I'm interested in prescription frames and would like to visit your ${activeStore.name} branch.`);
+
+        return `
+            <div class="visit-store-modal nsl-modal">
+                <button class="close-visit-store" aria-label="Close">&times;</button>
+                <div class="nsl-header">
+                    <div class="nsl-icon"><i class="ph ph-storefront"></i></div>
+                    <div class="nsl-header-text">
+                        <h3>Near Store Locations</h3>
+                        <p>Select any store location below to view details, phone number, chat on WhatsApp, or call directly.</p>
+                    </div>
+                </div>
+
+                <div class="nsl-city-bar">
+                    ${cityPillsHtml}
+                </div>
+
+                <div class="nsl-body-grid">
+                    <div class="nsl-list-col">
+                        <label class="nsl-col-title"><i class="ph ph-list-dashes"></i> Choose Store Location:</label>
+                        <div class="nsl-store-list">
+                            ${storeListHtml}
+                        </div>
+                    </div>
+
+                    <div class="nsl-detail-col">
+                        <div class="nsl-detail-card">
+                            <div class="nsl-detail-badge"><i class="ph ph-check-circle"></i> Selected Store</div>
+                            <h3 class="nsl-detail-title">${activeStore.name}</h3>
+
+                            <div class="nsl-details-box">
+                                <div class="nsl-detail-row">
+                                    <i class="ph ph-map-pin"></i>
+                                    <div>
+                                        <strong>Address:</strong>
+                                        <p>${activeStore.address}</p>
+                                    </div>
+                                </div>
+                                <div class="nsl-detail-row">
+                                    <i class="ph ph-clock"></i>
+                                    <div>
+                                        <strong>Store Timings:</strong>
+                                        <p>${activeStore.hours}</p>
+                                    </div>
+                                </div>
+                                <div class="nsl-detail-row">
+                                    <i class="ph ph-phone"></i>
+                                    <div>
+                                        <strong>Phone Number:</strong>
+                                        <p><a href="tel:${activeStore.phone}" class="nsl-phone-text">${activeStore.displayPhone}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nsl-actions-grid">
+                                <a href="https://wa.me/${activeStore.whatsapp}?text=${waText}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-whatsapp">
+                                    <i class="ph-fill ph-whatsapp-logo"></i> WhatsApp
+                                </a>
+                                <a href="tel:${activeStore.phone}" class="btn-nsl btn-nsl-call">
+                                    <i class="ph-fill ph-phone-call"></i> Call Now
+                                </a>
+                                <a href="${activeStore.mapUrl}" target="_blank" rel="noopener" class="btn-nsl btn-nsl-map">
+                                    <i class="ph-fill ph-navigation-arrow"></i> Directions
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    window.selectNearStore = (storeId) => {
+        currentSelectedStoreId = storeId;
+        refreshNearStoreModal();
+    };
+
+    window.filterNearStoreCity = (cityId) => {
+        currentCityFilter = cityId;
+        const matching = cityId === 'all'
+            ? nearStoreLocations
+            : nearStoreLocations.filter(s => s.city.toLowerCase() === cityId.toLowerCase());
+        if (matching.length > 0 && !matching.some(s => s.id === currentSelectedStoreId)) {
+            currentSelectedStoreId = matching[0].id;
+        }
+        refreshNearStoreModal();
+    };
+
+    function refreshNearStoreModal() {
+        let modal = document.getElementById('visit-store-modal');
+        if (modal) {
+            modal.innerHTML = buildNearStoreModalHTML();
+            attachModalEvents(modal);
+        }
+    }
+
+    function attachModalEvents(modal) {
+        const closeBtn = modal.querySelector('.close-visit-store');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        modal.onclick = (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        };
+    }
+
     function showVisitStoreModal() {
         let modal = document.getElementById('visit-store-modal');
         if (!modal) {
             modal = document.createElement('div');
             modal.id = 'visit-store-modal';
             modal.className = 'visit-store-overlay';
-            modal.innerHTML = `
-                <div class="visit-store-modal">
-                    <button class="close-visit-store" aria-label="Close">&times;</button>
-                    <div class="vsm-icon"><i class="ph ph-storefront"></i></div>
-                    <h3>Visit Our Store to Purchase</h3>
-                    <p>We'd love to help you find the perfect frame in person! Our optical experts are ready to assist you with fitting, prescription, and style advice.</p>
-                    <div class="vsm-details">
-                        <div class="vsm-detail-row">
-                            <i class="ph ph-map-pin"></i>
-                            <span>SHOP NO 300, OUTER RING ROAD, 15th Cross Rd, JP NAGAR, Bengaluru</span>
-                        </div>
-                        <div class="vsm-detail-row">
-                            <i class="ph ph-phone"></i>
-                            <a href="tel:+918884111108">+91 8884111108</a>
-                        </div>
-                        <div class="vsm-detail-row">
-                            <i class="ph ph-clock"></i>
-                            <span>Mon – Sun: 10:30 AM – 9:30 PM</span>
-                        </div>
-                    </div>
-                    <div class="vsm-actions">
-                        <a href="https://maps.google.com/?q=LensHut+JP+Nagar+Bengaluru" target="_blank" class="btn btn-primary"><i class="ph ph-navigation-arrow"></i> Get Directions</a>
-                        <a href="tel:+918884111108" class="btn btn-outline"><i class="ph ph-phone"></i> Call Now</a>
-                    </div>
-                </div>
-            `;
             document.body.appendChild(modal);
-
-            modal.querySelector('.close-visit-store').addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
         }
+        modal.innerHTML = buildNearStoreModalHTML();
+        attachModalEvents(modal);
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
     // Make showVisitStoreModal accessible globally (for product card buttons)
     window.showVisitStoreModal = showVisitStoreModal;
+    window.openNearStoreModal = showVisitStoreModal;
 
 
 
@@ -331,9 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (sortSelect) {
             const sortValue = sortSelect.value;
-            if (sortValue === 'price-low') filtered.sort((a, b) => a.price - b.price);
-            else if (sortValue === 'price-high') filtered.sort((a, b) => b.price - a.price);
-            else if (sortValue === 'new') filtered.sort((a, b) => (a.isNew === b.isNew) ? 0 : a.isNew ? -1 : 1);
+            if (sortValue === 'name-asc') filtered.sort((a, b) => a.name.localeCompare(b.name));
+            else if (sortValue === 'name-desc') filtered.sort((a, b) => b.name.localeCompare(a.name));
+            else if (sortValue === 'new') filtered.sort((a, b) => (a.badge === 'new-arrival' ? -1 : 1));
         }
 
         renderShop(filtered, 1); // Always reset to page 1 on filter/sort change
@@ -397,12 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="product-size">Size: ${product.size} &nbsp;|&nbsp; ${product.shape.charAt(0).toUpperCase() + product.shape.slice(1)}</p>
                     
                     <div class="product-footer">
-                        <div class="product-price-section">
-                            <span class="product-price">₹${product.price.toLocaleString()}</span>
-                            <span class="product-tax">Incl of taxes</span>
-                        </div>
-                        <button class="btn-visit-store" onclick="showVisitStoreModal()" title="Visit Store to Purchase">
-                            <i class="ph ph-storefront"></i> Buy In-Store
+                        <button class="btn-near-store" onclick="showVisitStoreModal()" title="Near Store Location">
+                            <i class="ph ph-map-pin"></i> Near Store Location
                         </button>
                     </div>
                 </div>
