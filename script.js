@@ -213,6 +213,18 @@ document.addEventListener('DOMContentLoaded', () => {
             mapUrl: 'https://maps.google.com/?q=LensHut+URS+Road+Mysuru'
         },
         {
+            id: 'kalidasa-road',
+            name: 'LensHut Kalidasa Road',
+            city: 'Mysuru',
+            area: 'Kalidasa Rd, Mysuru',
+            address: 'Ground Floor, Ganesh Arcade, Shop No. 2813, D/1A, Kalidasa Rd, Above Green Leaf Hotel, Mysuru – 570002',
+            phone: '08214287700',
+            displayPhone: '0821 428 7700',
+            whatsapp: '918214287700',
+            hours: 'Mon–Fri 10:00AM–9:00PM · Sat–Sun 10:00AM–9:30PM',
+            mapUrl: 'https://maps.google.com/?q=Ganesh+Arcade+Kalidasa+Rd+Mysuru'
+        },
+        {
             id: 'hassan',
             name: 'LensHut Hassan',
             city: 'Hassan',

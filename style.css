@@ -3185,7 +3185,8 @@ button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
-    margin-top: 1.25rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
     width: 100%;
 }
 
