@@ -223,18 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
             whatsapp: '918214287700',
             hours: 'Mon–Fri 10:00AM–9:00PM · Sat–Sun 10:00AM–9:30PM',
             mapUrl: 'https://maps.google.com/?q=Ganesh+Arcade+Kalidasa+Rd+Mysuru'
-        },
-        {
-            id: 'hassan',
-            name: 'LensHut Hassan',
-            city: 'Hassan',
-            area: 'Krishnaraja Pura, Hassan',
-            address: 'Ground Floor, No 198/A, Shankar Mutt Rd, Krishnaraja Pura, Hassan, Karnataka 573201',
-            phone: '8172450094',
-            displayPhone: '08172-450094',
-            whatsapp: '918172450094',
-            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
-            mapUrl: 'https://maps.google.com/?q=LensHut+Hassan'
         }
     ];
 
@@ -250,8 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cities = [
             { id: 'all', label: 'All Stores', count: nearStoreLocations.length },
             { id: 'bengaluru', label: 'Bengaluru', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'bengaluru').length },
-            { id: 'mysuru', label: 'Mysuru', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'mysuru').length },
-            { id: 'hassan', label: 'Hassan', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'hassan').length }
+            { id: 'mysuru', label: 'Mysuru', count: nearStoreLocations.filter(s => s.city.toLowerCase() === 'mysuru').length }
         ];
 
         const cityPillsHtml = cities.map(c => `
