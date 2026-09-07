@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: '08214287700',
             displayPhone: '0821 428 7700',
             whatsapp: '918214287700',
-            hours: 'Mon–Fri 10:00AM–9:00PM · Sat–Sun 10:00AM–9:30PM',
+            hours: 'Mon – Sun: 10:30 AM – 9:30 PM',
             mapUrl: 'https://maps.google.com/?q=Ganesh+Arcade+Kalidasa+Rd+Mysuru'
         }
     ];
