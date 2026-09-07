@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /* ==========================================================================
-       Near Store Locations (Excluding Tumkur)
+       Near Store Locations
        ========================================================================== */
     const nearStoreLocations = [
         {
