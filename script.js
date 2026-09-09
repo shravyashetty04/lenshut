@@ -658,7 +658,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial render
     if (productGrid && typeof products !== 'undefined') {
-        renderShop(products, 1);
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        if (categoryParam) {
+            const cb = document.querySelector(`.filter-checkbox[data-filter="category"][value="${categoryParam}"]`);
+            if (cb) cb.checked = true;
+        }
+        filterAndSortProducts();
     }
 
     function formatBadgeName(badge) {
@@ -684,7 +690,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="product-info">
                     <div class="product-brand">${product.brand}</div>
-                    <h3 class="product-title" title="${product.desc}">${displayDesc}</h3>
+                    <h3 class="product-title" title="${product.name}">${product.name}</h3>
+                    <p class="product-desc" style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; line-height: 1.4;" title="${product.desc}">${displayDesc}</p>
                     <p class="product-size">Size: ${product.size} &nbsp;|&nbsp; ${product.shape.charAt(0).toUpperCase() + product.shape.slice(1)}</p>
                     
                     <div class="product-footer">
